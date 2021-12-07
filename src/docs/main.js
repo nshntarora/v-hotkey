@@ -1,22 +1,27 @@
-import Vue from 'vue'
-import VueHotkey from '../../src/index.js'
-import VueRouter from 'vue-router'
+import { createApp } from "@vue/runtime-dom";
+import VueHotkey from "../../src/index.js";
+import { createRouter, createWebHistory } from "vue-router";
 
-import App from './App.vue'
-import routes from './routes'
+import App from "./App.vue";
+import routes from "./routes";
 
-import 'bulma/css/bulma.css'
+import "bulma/css/bulma.css";
 
-Vue.use(VueHotkey)
-Vue.use(VueRouter)
+const router = createRouter({
+  history: createWebHistory("/"),
+  routes
+});
 
-const router = new VueRouter({ routes })
+const app = createApp(App);
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  render (h) {
-    return h(App)
-  }
-})
+app.use(router).use(VueHotkey).mount("#app")
+
+
+// /* eslint-disable no-new */
+// new Vue({
+//   el: "#app",
+//   router,
+//   render(h) {
+//     return h(App);
+//   }
+// });

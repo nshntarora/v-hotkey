@@ -1,11 +1,8 @@
 # v-hotkey
 
-[![bundlephobia minified size](https://badgen.net/bundlephobia/min/v-hotkey)](https://bundlephobia.com/result?p=v-hotkey)
-[![npm package version](https://badgen.net/npm/v/v-hotkey)](https://npm.im/v-hotkey)
-[![github license](https://badgen.net/github/license/dafrok/v-hotkey)](https://github.com/dafrok/v-hotkey/blob/master/LICENSE)
-[![js standard style](https://badgen.net/badge/code%20style/standard/pink)](https://standardjs.com)
+Vue 3.x directive for binding hotkeys to components.
 
-Vue 2.x directive for binding hotkeys to components.
+Fork of [https://github.com/Dafrok/v-hotkey](https://github.com/Dafrok/v-hotkey)
 
 ## Play with me
 
@@ -22,56 +19,57 @@ $ yarn add v-hotkey
 ## Usage
 
 ```javascript
-import Vue from 'vue'
-import VueHotkey from 'v-hotkey'
-
-Vue.use(VueHotkey)
+import { createApp } from "vue";
+import VueHotkey from "v-hotkey";
+const app = createApp(Root);
+app.use(VueHotkey);
+app.mount("#app");
 ```
 
 ```vue
 <template>
-  <span v-hotkey="keymap" v-show="show"> 
+  <span v-hotkey="keymap" v-show="show">
     Press `ctrl + esc` to toggle me! Hold `enter` to hide me!
   </span>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: true
-    }
+    };
   },
   methods: {
-    toggle () {
-      this.show = !this.show
+    toggle() {
+      this.show = !this.show;
     },
-    show () {
-      this.show = true
+    show() {
+      this.show = true;
     },
-    hide () {
-      this.show = false
+    hide() {
+      this.show = false;
     }
   },
   computed: {
-    keymap () {
+    keymap() {
       return {
         // 'esc+ctrl' is OK.
-        'ctrl+esc': this.toggle,
-        'enter': {
+        "ctrl+esc": this.toggle,
+        enter: {
           keydown: this.hide,
           keyup: this.show
         }
-      }
+      };
     }
   }
-}
+};
 </script>
 ```
 
 ## Event Handler
 
-- keydown (as default) 
+- keydown (as default)
 - keyup
 
 ## Key Combination
@@ -105,8 +103,10 @@ Add the stop modifier to the directive to stop event propagation.
 ```vue
 <template>
   <div v-hotkey.stop="keymap">
-    <span> Enter characters in editable areas doesn't trigger any hotkeys. </span>
-    <input>
+    <span>
+      Enter characters in editable areas doesn't trigger any hotkeys.
+    </span>
+    <input />
   </div>
 </template>
 ```
@@ -119,12 +119,12 @@ This ability to provide their own key code alias for developers who using keyboa
 ### Definition
 
 ```javascript
-import Vue from 'vue'
-import VueHotkey from 'v-hotkey'
+import Vue from "vue";
+import VueHotkey from "v-hotkey";
 
 Vue.use(VueHotkey, {
-  '①': 49 // the key code of character '1'
-})
+  "①": 49 // the key code of character '1'
+});
 ```
 
 ### Template
@@ -133,16 +133,16 @@ Vue.use(VueHotkey, {
 <span v-hotkey="keymap"></span>
 <script>
 export default {
-  foo () {
-    console.log('Hooray!')
+  foo() {
+    console.log("Hooray!");
   },
   computed: {
-    keymap () {
+    keymap() {
       return {
-        '①': foo
-      }
+        "①": foo
+      };
     }
   }
-}
+};
 </script>
 ```

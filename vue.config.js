@@ -10,7 +10,7 @@ module.exports = {
       entry: './src/docs/main',
       title: 'V-Hotkey',
       template: HtmlWebpackTemplate,
-      inject: false,
+      inject: true,
       appMountId: 'app'
     }
   }

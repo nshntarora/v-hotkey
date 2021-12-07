@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-hotkey="{ enter: show, esc: hide }"
+      v-hotkey="keymap"
       class="hotkey"
     >
       Toggle
@@ -15,9 +15,16 @@
   </div>
 </template>
 
-<script>
-export default {
+<script>import { defineComponent } from '@vue/runtime-core'
+
+export default defineComponent({
+  name: 'Foo',
   data: () => ({ visible: false }),
+  computed: {
+    keymap () {
+      return { enter: this.show, esc: this.hide }
+    }
+  },
   methods: {
     show () {
       this.visible = true
@@ -26,5 +33,5 @@ export default {
       this.visible = false
     }
   }
-}
+})
 </script>

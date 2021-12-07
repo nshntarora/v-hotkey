@@ -7,6 +7,11 @@ section.hero.is-fullheight
 </template>
 
 <script>
+import { defineComponent } from "@vue/runtime-core";
+
+export default defineComponent({
+  name: "App"
+})
 </script>
 
 <style lang="stylus">

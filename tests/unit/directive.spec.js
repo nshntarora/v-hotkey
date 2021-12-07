@@ -1,14 +1,17 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import hotkeyDirective from '../../src/index'
 import Foo from './Foo.vue'
 
-const localVue = createLocalVue()
-localVue.use(hotkeyDirective)
+// const localVue = createLocalVue()
+// localVue.use(hotkeyDirective)
 
 describe('Hotkey works', () => {
   it('shows div on enter down', async () => {
     const wrapper = mount(Foo, {
-      localVue,
+      global: {
+        plugins: [hotkeyDirective]
+      },
+      // localVue,
       attachToDocument: true
     })
     let div = wrapper.find('.visible')
@@ -21,7 +24,9 @@ describe('Hotkey works', () => {
 
   it('hiddes div on esc down', async () => {
     const wrapper = mount(Foo, {
-      localVue,
+      global: {
+        plugins: [hotkeyDirective]
+      },
       attachToDocument: true
     })
     wrapper.trigger('keydown.enter')
